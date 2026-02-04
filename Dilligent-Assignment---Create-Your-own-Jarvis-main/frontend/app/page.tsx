@@ -563,23 +563,29 @@ export default function Home() {
   }
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 overflow-hidden">
+      {/* Animated Background Effect */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full blur-3xl animate-pulse-smooth" />
+        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-gradient-to-tl from-purple-500/20 to-pink-500/20 rounded-full blur-3xl animate-pulse-smooth" style={{ animationDelay: '1s' }} />
+      </div>
+
       {/* Sidebar */}
       <div
-        className={`${sidebarCollapsed ? 'w-16' : 'w-96'} bg-slate-900 text-white flex flex-col transition-all duration-300`}
+        className={`${sidebarCollapsed ? 'w-16' : 'w-96'} sidebar text-white flex flex-col transition-all duration-300 relative z-10`}
       >
         {/* Header */}
-        <div className="p-4 border-b border-slate-700">
+        <div className="p-4 border-b border-slate-700/50 bg-gradient-to-r from-indigo-600/20 to-purple-600/20 backdrop-blur-xl">
           <div className="flex items-center justify-between">
             {!sidebarCollapsed && (
               <div>
-                <h1 className="text-xl font-bold text-white">Your Jarvis</h1>
-                <p className="text-slate-300 text-sm">Personal AI Assistant</p>
+                <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-float">Your Jarvis</h1>
+                <p className="text-slate-300 text-sm mt-1">✨ Premium AI Assistant</p>
               </div>
             )}
             <button
               onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-              className="p-2 hover:bg-slate-700 rounded-lg transition-colors"
+              className="p-2 hover:bg-white/10 rounded-lg transition-all duration-300 hover:scale-110"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -603,36 +609,42 @@ export default function Home() {
                   localStorage.removeItem('sessionDocIds')
                   setCurrentView('chat')
                 }}
-                className={`w-full flex items-center space-x-3 p-3 rounded-lg transition-colors ${currentView === 'chat'
-                  ? 'bg-slate-800 text-white'
-                  : 'bg-slate-800 hover:bg-slate-700 text-slate-300'
-                  }`}
+                className={`w-full flex items-center space-x-3 p-3 rounded-xl transition-all duration-300 group ${
+                  currentView === 'chat'
+                    ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg shadow-indigo-500/50'
+                    : 'bg-white/5 hover:bg-white/10 text-slate-300 hover:shadow-lg hover:shadow-white/10'
+                }`}
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                </svg>
-                <span>New Chat</span>
+                <div className="p-2 bg-white/10 rounded-lg group-hover:bg-white/20 transition-all duration-300">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                  </svg>
+                </div>
+                <span className="font-medium">New Chat</span>
               </button>
 
               {/* Knowledge Base */}
               <button
                 onClick={() => setCurrentView('knowledge')}
-                className={`w-full flex items-center space-x-3 p-3 rounded-lg transition-colors ${currentView === 'knowledge'
-                  ? 'bg-slate-800 text-white'
-                  : 'hover:bg-slate-800 text-slate-300'
-                  }`}
+                className={`w-full flex items-center space-x-3 p-3 rounded-xl transition-all duration-300 group ${
+                  currentView === 'knowledge'
+                    ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg shadow-indigo-500/50'
+                    : 'bg-white/5 hover:bg-white/10 text-slate-300 hover:shadow-lg hover:shadow-white/10'
+                }`}
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                  />
-                </svg>
+                <div className="p-2 bg-white/10 rounded-lg group-hover:bg-white/20 transition-all duration-300">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                    />
+                  </svg>
+                </div>
                 <div className="flex items-center justify-between w-full">
-                  <span>Knowledge Base</span>
-                  <span className="text-xs bg-slate-700 px-2 py-1 rounded">
+                  <span className="font-medium">Knowledge Base</span>
+                  <span className="text-xs bg-white/20 px-2.5 py-1 rounded-full font-semibold">
                     {knowledgeStats.total_documents}
                   </span>
                 </div>
@@ -641,20 +653,23 @@ export default function Home() {
               {/* Email Assistant */}
               <button
                 onClick={() => setCurrentView('email')}
-                className={`w-full flex items-center space-x-3 p-3 rounded-lg transition-colors ${currentView === 'email'
-                  ? 'bg-slate-800 text-white'
-                  : 'hover:bg-slate-800 text-slate-300'
-                  }`}
+                className={`w-full flex items-center space-x-3 p-3 rounded-xl transition-all duration-300 group ${
+                  currentView === 'email'
+                    ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg shadow-indigo-500/50'
+                    : 'bg-white/5 hover:bg-white/10 text-slate-300 hover:shadow-lg hover:shadow-white/10'
+                }`}
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                  />
-                </svg>
-                <span>Email Agent</span>
+                <div className="p-2 bg-white/10 rounded-lg group-hover:bg-white/20 transition-all duration-300">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                    />
+                  </svg>
+                </div>
+                <span className="font-medium">Email Agent</span>
               </button>
 
               {/* Chat History */}
@@ -709,23 +724,23 @@ export default function Home() {
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
         {/* Top Bar */}
-        <div className="bg-white border-b px-6 py-4 shadow-sm">
+        <div className="glass-effect border-b border-white/10 px-6 py-4 shadow-xl relative z-10">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-lg font-semibold text-gray-900">Your Personal AI Assistant</h2>
-              <p className="text-sm text-gray-600">
-                Ask questions, upload documents, or get intelligent assistance
+              <h2 className="text-xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Your Personal AI Assistant</h2>
+              <p className="text-sm text-gray-600 mt-1">
+                💎 Ask questions, upload documents, or get intelligent assistance
               </p>
             </div>
             <div className="flex items-center space-x-3">
-              <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium">
+              <span className="px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full text-xs font-semibold shadow-lg shadow-blue-500/30 animate-float">
                 {selectedMode.replace('_', ' ')}
               </span>
-              <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">
+              <span className="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full text-xs font-semibold shadow-lg shadow-green-500/30 animate-float" style={{ animationDelay: '0.2s' }}>
                 {selectedModel}
               </span>
               {sessionDocIds.length > 0 && (
-                <span className="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-xs font-medium" title="Documents in this session">
+                <span className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-full text-xs font-semibold shadow-lg shadow-purple-500/30 animate-float" style={{ animationDelay: '0.4s' }} title="Documents in this session">
                   📄 {sessionDocIds.length} session doc{sessionDocIds.length !== 1 ? 's' : ''}
                 </span>
               )}
@@ -734,10 +749,10 @@ export default function Home() {
         </div>
 
         {/* Content Area */}
-        <div className="flex-1 overflow-y-auto p-6" style={{ paddingBottom: currentView === 'chat' ? (sessionDocIds.length > 0 ? '280px' : '200px') : '24px' }}>
+        <div className="flex-1 overflow-y-auto p-6 bg-white/95 backdrop-blur-sm" style={{ paddingBottom: currentView === 'chat' ? (sessionDocIds.length > 0 ? '280px' : '200px') : '24px' }}>
           {currentView === 'knowledge' ? (
             /* Knowledge Base Management View */
-            <div className="max-w-6xl mx-auto">
+            <div className="max-w-6xl mx-auto bg-transparent">
               <div className="mb-8">
                 <h1 className="text-3xl font-bold text-gray-900 mb-2">Knowledge Base Management</h1>
                 <p className="text-gray-600">Upload, manage, and organize your company documents</p>
@@ -882,14 +897,14 @@ export default function Home() {
             <EmailAgent />
           ) : (
             /* Chat View */
-            <div>
+            <div className="bg-transparent">
               {messages.length === 0 ? (
-                <div className="max-w-4xl mx-auto">
+                <div className="max-w-4xl mx-auto bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-2xl">
                   {/* Welcome Section */}
                   <div className="text-center mb-8">
-                    <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <div className="w-20 h-20 premium-gradient rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-2xl shadow-indigo-500/50 animate-float">
                       <svg
-                        className="w-8 h-8 text-white"
+                        className="w-10 h-10 text-white"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -902,14 +917,14 @@ export default function Home() {
                         />
                       </svg>
                     </div>
-                    <h1 className="text-3xl font-bold text-gray-900 mb-2">
+                    <h1 className="text-4xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">
                       What's on your mind?
                     </h1>
-                    <p className="text-xl text-gray-600 mb-4">
-                      Intelligent Retrieval-Augmented Generation (RAG) Assistant
+                    <p className="text-xl text-gray-800 mb-6 font-semibold">
+                      🚀 Intelligent Retrieval-Augmented Generation (RAG) Assistant
                     </p>
-                    <div className="max-w-2xl mx-auto text-gray-600 space-y-2">
-                      <p>
+                    <div className="max-w-2xl mx-auto text-gray-700 space-y-2">
+                      <p className="leading-relaxed font-medium">
                         Leverage advanced language models with semantic search capabilities to extract
                         actionable insights from your knowledge base. Configure memory modes, enforce citations,
                         and choose your inference model for optimized results.
@@ -923,19 +938,19 @@ export default function Home() {
                   {/* Starter Questions */}
                   <div className="mb-8">
                     <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                      Suggested queries:
+                      💡 Suggested queries:
                     </h3>
                     <div className="grid grid-cols-1 gap-3">
                       {starterQuestions.map((question, index) => (
                         <button
                           key={index}
                           onClick={() => handleStarterQuestion(question)}
-                          className="text-left p-4 bg-white border border-gray-200 rounded-lg hover:border-blue-300 hover:shadow-md transition-all duration-200 group"
+                          className="text-left p-5 card card-hover group"
                         >
                           <div className="flex items-start space-x-3">
-                            <div className="w-8 h-8 bg-blue-50 rounded-full flex items-center justify-center group-hover:bg-blue-100 transition-colors">
+                            <div className="w-10 h-10 premium-gradient rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/30 group-hover:shadow-indigo-500/50 transition-all duration-300 group-hover:scale-110">
                               <svg
-                                className="w-4 h-4 text-blue-600"
+                                className="w-5 h-5 text-white"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
@@ -948,9 +963,12 @@ export default function Home() {
                                 />
                               </svg>
                             </div>
-                            <p className="text-sm text-gray-700 group-hover:text-gray-900">
+                            <p className="text-sm text-gray-700 group-hover:text-gray-900 font-medium flex-1">
                               {question}
                             </p>
+                            <svg className="w-5 h-5 text-gray-400 group-hover:text-indigo-600 transition-all duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
                           </div>
                         </button>
                       ))}
@@ -1034,17 +1052,17 @@ export default function Home() {
                   </div>
                 </div>
               ) : (
-                <div className="max-w-4xl mx-auto space-y-6">
+                <div className="max-w-4xl mx-auto space-y-6 bg-white/60 backdrop-blur-sm rounded-3xl p-6 shadow-xl">
                   {messages.map(message => (
                     <div
                       key={message.id}
                       className={`flex items-end gap-3 ${message.isUser ? 'flex-row-reverse' : 'flex-row'}`}
                     >
                       {/* Avatar/Logo */}
-                      <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
+                      <div className={`flex-shrink-0 w-10 h-10 rounded-2xl flex items-center justify-center shadow-lg ${
                         message.isUser
-                          ? 'bg-blue-600 text-white'
-                          : 'bg-gradient-to-br from-blue-500 to-purple-600 text-white'
+                          ? 'bg-gradient-to-br from-blue-500 to-purple-600 shadow-blue-500/50'
+                          : 'bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 shadow-purple-500/50 animate-float'
                       }`}>
                         {message.isUser ? (
                           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -1129,11 +1147,11 @@ export default function Home() {
 
                   {isLoading && (
                     <div className="flex justify-start">
-                      <div className="bg-white border border-gray-200 px-4 py-3 rounded-lg max-w-lg">
-                        <div className="flex items-center space-x-2 mb-3">
-                          <div className="w-4 h-4 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
-                          <span className="font-medium text-gray-900">
-                            Processing your request...
+                      <div className="glass-effect px-6 py-4 rounded-3xl max-w-lg premium-border">
+                        <div className="flex items-center space-x-3 mb-3">
+                          <div className="w-5 h-5 border-3 border-indigo-600 border-t-transparent rounded-full animate-spin" />
+                          <span className="font-semibold text-gray-900">
+                            ✨ Processing your request...
                           </span>
                         </div>
 
@@ -1251,9 +1269,9 @@ export default function Home() {
             )}
 
             {/* Chat Input with Integrated Controls */}
-            <div className="relative bg-gray-50 rounded-2xl border border-gray-200 focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500">
+            <div className="relative glass-effect rounded-3xl border-2 border-white/20 shadow-2xl premium-border">
               {/* Top Controls Bar */}
-              <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200">
+              <div className="flex items-center justify-between px-5 py-4 border-b border-white/10 bg-gradient-to-r from-indigo-500/5 to-purple-500/5">
                 <div className="flex items-center space-x-3">
                   {/* Upload Button */}
                   <button
@@ -1421,7 +1439,7 @@ export default function Home() {
                 <button
                   onClick={sendMessage}
                   disabled={isLoading || !input.trim()}
-                  className="ml-3 p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="ml-3 p-3 premium-gradient text-white rounded-2xl shadow-lg shadow-indigo-500/50 hover:shadow-xl hover:shadow-indigo-500/60 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:scale-105"
                 >
                   {isLoading ? (
                     <svg
