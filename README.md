@@ -1,2 +1,0 @@
-# Chatbot
-Diligent chatbot
